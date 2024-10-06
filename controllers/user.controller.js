@@ -1,6 +1,7 @@
 const { response, request } = require('express');
 const bcryptjs = require('bcryptjs');
 
+const { generarJwt } = require("../helpers/generar-jwt");
 const Usuario = require('../models/user.model');
 
 const userLogin = async (req = request, res = response) => {
@@ -11,11 +12,6 @@ const userLogin = async (req = request, res = response) => {
 
     // Validar email
     if (!usuario) {
-      return res.status(400).json({ msg: "Usuario o contraseña incorrectos" });
-    }
-
-    // Validar estado usuario
-    if (!usuario.estado) {
       return res.status(400).json({ msg: "Usuario o contraseña incorrectos" });
     }
 
