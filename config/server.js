@@ -10,7 +10,8 @@ class Server {
         this.app  = express();
         this.port = process.env.PORT;
         this.paths = {
-            usuarios:'/api/user',
+            users:'/api/user',
+            dreams: '/api/dream'
         };
 
         // Conectar a base de datos
@@ -44,7 +45,8 @@ class Server {
     }
 
     routes() {
-        this.app.use( this.paths.usuarios, require('../routes/user.routes'));
+        this.app.use( this.paths.users, require('../routes/user.routes'));
+        this.app.use( this.paths.dreams, require('../routes/dream.routes'));
     }
 
     listen() {

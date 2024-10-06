@@ -37,19 +37,23 @@ const userLogin = async (req = request, res = response) => {
 
 const userRegister = async(req, res = response) => {
     
-    const { email, password } = req.body;
-    const usuario = new Usuario({ email, password });
+    try {
+        const { email, password } = req.body;
+        const usuario = new Usuario({ email, password });
 
-    // Encriptar la contraseña
-    const salt = bcryptjs.genSaltSync();
-    usuario.password = bcryptjs.hashSync( password, salt );
+        // Encriptar la contraseña
+        const salt = bcryptjs.genSaltSync();
+        usuario.password = bcryptjs.hashSync( password, salt );
 
-    // Guardar en BD
-    await usuario.save();
+        // Guardar en BD
+        await usuario.save();
 
-    res.json({
-        usuario
-    });
+        return res.json({
+            usuario
+        });
+    } catch (error) {
+        return res.status(500).json({msg: error.message})
+    }
 }
 
 module.exports = {
