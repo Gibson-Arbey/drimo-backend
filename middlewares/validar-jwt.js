@@ -17,10 +17,6 @@ const validarJwt = async (req = request, res = response, next) => {
             return res.status(401).json({msg: "Usuario no valido"});
         }
 
-        if(!usuario.estado) {
-            return res.status(401).json({msg: "Usuario no valido"});
-        }
-
         req.usuario = {
             ...usuario._doc
         }

@@ -21,6 +21,11 @@ const DreamSchema = Schema({
     sleepFactors: {
         type: [String],
         required: [true, 'Los factores de sueño son obligatorios'], 
+    },
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
     }
 });
 
